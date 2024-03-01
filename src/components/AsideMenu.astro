@@ -1,0 +1,35 @@
+---
+import AsideMenuItem from "@/components/AsideMenuItem.astro";
+import AsideMenuCard from "@/components/AsideMenuCard.astro";
+import Home from "@/icons/Home.astro";
+import Search from "@/icons/Search.astro";
+import Library from "@/icons/Library.astro";
+
+import { playlists } from "@/lib/data";
+---
+
+<nav class="flex flex-col flex-1 gap-2">
+  <div class="bg-zinc-900 rounded-lg p-2">
+    <ul class="">
+      <AsideMenuItem href="/">
+        <Home />
+        Home
+      </AsideMenuItem>
+      <AsideMenuItem href="/#">
+        <Search />
+        Search
+      </AsideMenuItem>
+    </ul>
+  </div>
+
+  <div class="bg-zinc-900 rounded-lg p-2 flex-1">
+    <ul>
+      <AsideMenuItem href="/">
+        <Library />
+        Library
+      </AsideMenuItem>
+
+      {playlists.map((playlist) => <AsideMenuCard playlist={playlist} />)}
+    </ul>
+  </div>
+</nav>
