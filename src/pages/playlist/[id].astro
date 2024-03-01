@@ -11,6 +11,17 @@ const playlist = allPlaylists.find((playlist) => playlist.id === id);
 const playListSongs = songs.filter(
   (song) => song.albumId === playlist?.albumId
 );
+
+const totalMinutes = playListSongs
+  .map(({ duration }) => {
+    return (
+      parseInt(duration.split(":")[0]) * 60 + parseInt(duration.split(":")[1])
+    );
+  })
+  .reduce((a, b) => a + b, 0);
+const minutes = Math.floor(totalMinutes / 60);
+const seconds = totalMinutes % 60;
+const playListDuration = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 ---
 
 <Layout title="Spotify Clone">
@@ -48,7 +59,9 @@ const playListSongs = songs.filter(
               <span>{playlist?.artists.join(", ")}</span>
             </div>
             <p class="mt-1">
-              <span class="text-white">{playListSongs.length} song</span>, 3h
+              <span class="text-white">{playListSongs.length} song</span>, {
+                playListDuration
+              }
               aproximity
             </p>
           </div>
